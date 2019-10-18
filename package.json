@@ -17,6 +17,7 @@
     "mocha": "^5.2.0",
     "nyc": "^14.1.1",
     "standard": "^12.0.1",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "@types/node": "^12.11.1"
   }
 }
