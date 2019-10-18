@@ -675,14 +675,14 @@ export interface ShippingMethod {
 export interface Empty {
 }
 
-export interface Pager<T> {
+export declare class Pager<T> {
   count(): number;
   first(): T;
   each(): Iterator<T>;
   eachPage(): AsyncIterator<T>;
 }
 
-export interface Client {
+export declare class Client {
   constructor(apiKey: string);
   apiVersion(): string;
   listSites(params: Object): Pager<Site>;
