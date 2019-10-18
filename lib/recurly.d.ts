@@ -39,7 +39,7 @@ export interface Settings {
 export interface Error {
   type?: string;
   message?: string;
-  params?: Object[];
+  params?: object[];
 }
 
 export interface Account {
@@ -122,7 +122,7 @@ export interface PaymentMethod {
 export interface FraudInfo {
   score?: number;
   decision?: string;
-  riskRulesTriggered?: Object;
+  riskRulesTriggered?: object;
 }
 
 export interface BillingInfoUpdatedBy {
@@ -138,7 +138,7 @@ export interface CustomField {
 export interface ErrorMayHaveTransaction {
   type?: string;
   message?: string;
-  params?: Object[];
+  params?: object[];
   transactionError?: TransactionError;
 }
 
@@ -314,7 +314,7 @@ export interface Transaction {
   gatewayApprovalCode?: string;
   gatewayResponseCode?: string;
   gatewayResponseTime?: number;
-  gatewayResponseValues?: Object;
+  gatewayResponseValues?: object;
   cvvCheck?: string;
   avsCheck?: string;
   createdAt?: Date;
@@ -678,108 +678,108 @@ export interface Empty {
 export declare class Pager<T> {
   count(): number;
   first(): T;
-  each(): AsyncIterator<T>;
-  eachPage(): AsyncIterator<T>;
+  each(): AsyncIterable<T>;
+  eachPage(): AsyncIterable<T>;
 }
 
 export declare class Client {
   constructor(apiKey: string);
   apiVersion(): string;
-  listSites(params: Object): Pager<Site>;
+  listSites(params: object): Pager<Site>;
   getSite(siteId: string): Promise<Site>;
-  listAccounts(params: Object): Pager<Account>;
-  createAccount(body: Object): Promise<Account>;
+  listAccounts(params: object): Pager<Account>;
+  createAccount(body: object): Promise<Account>;
   getAccount(accountId: string): Promise<Account>;
-  updateAccount(accountId: string, body: Object): Promise<Account>;
+  updateAccount(accountId: string, body: object): Promise<Account>;
   deactivateAccount(accountId: string): Promise<Account>;
   getAccountAcquisition(accountId: string): Promise<AccountAcquisition>;
-  updateAccountAcquisition(accountId: string, body: Object): Promise<AccountAcquisition>;
+  updateAccountAcquisition(accountId: string, body: object): Promise<AccountAcquisition>;
   removeAccountAcquisition(accountId: string): Promise<Empty>;
   reactivateAccount(accountId: string): Promise<Account>;
   getAccountBalance(accountId: string): Promise<AccountBalance>;
   getBillingInfo(accountId: string): Promise<BillingInfo>;
-  updateBillingInfo(accountId: string, body: Object): Promise<BillingInfo>;
+  updateBillingInfo(accountId: string, body: object): Promise<BillingInfo>;
   removeBillingInfo(accountId: string): Promise<Empty>;
-  listAccountCouponRedemptions(accountId: string, params: Object): Pager<CouponRedemption>;
+  listAccountCouponRedemptions(accountId: string, params: object): Pager<CouponRedemption>;
   getActiveCouponRedemption(accountId: string): Promise<CouponRedemption>;
-  createCouponRedemption(accountId: string, body: Object): Promise<CouponRedemption>;
+  createCouponRedemption(accountId: string, body: object): Promise<CouponRedemption>;
   removeCouponRedemption(accountId: string): Promise<CouponRedemption>;
-  listAccountCreditPayments(accountId: string, params: Object): Pager<CreditPayment>;
-  listAccountInvoices(accountId: string, params: Object): Pager<Invoice>;
-  createInvoice(accountId: string, body: Object): Promise<InvoiceCollection>;
-  previewInvoice(accountId: string, body: Object): Promise<InvoiceCollection>;
-  listAccountLineItems(accountId: string, params: Object): Pager<LineItem>;
-  createLineItem(accountId: string, body: Object): Promise<LineItem>;
-  listAccountNotes(accountId: string, params: Object): Pager<AccountNote>;
+  listAccountCreditPayments(accountId: string, params: object): Pager<CreditPayment>;
+  listAccountInvoices(accountId: string, params: object): Pager<Invoice>;
+  createInvoice(accountId: string, body: object): Promise<InvoiceCollection>;
+  previewInvoice(accountId: string, body: object): Promise<InvoiceCollection>;
+  listAccountLineItems(accountId: string, params: object): Pager<LineItem>;
+  createLineItem(accountId: string, body: object): Promise<LineItem>;
+  listAccountNotes(accountId: string, params: object): Pager<AccountNote>;
   getAccountNote(accountId: string, accountNoteId: string): Promise<AccountNote>;
-  listShippingAddresses(accountId: string, params: Object): Pager<ShippingAddress>;
-  createShippingAddress(accountId: string, body: Object): Promise<ShippingAddress>;
+  listShippingAddresses(accountId: string, params: object): Pager<ShippingAddress>;
+  createShippingAddress(accountId: string, body: object): Promise<ShippingAddress>;
   getShippingAddress(accountId: string, shippingAddressId: string): Promise<ShippingAddress>;
-  updateShippingAddress(accountId: string, shippingAddressId: string, body: Object): Promise<ShippingAddress>;
+  updateShippingAddress(accountId: string, shippingAddressId: string, body: object): Promise<ShippingAddress>;
   removeShippingAddress(accountId: string, shippingAddressId: string): Promise<Empty>;
-  listAccountSubscriptions(accountId: string, params: Object): Pager<Subscription>;
-  listAccountTransactions(accountId: string, params: Object): Pager<Transaction>;
-  listChildAccounts(accountId: string, params: Object): Pager<Account>;
-  listAccountAcquisition(params: Object): Pager<AccountAcquisition>;
-  listCoupons(params: Object): Pager<Coupon>;
-  createCoupon(body: Object): Promise<Coupon>;
+  listAccountSubscriptions(accountId: string, params: object): Pager<Subscription>;
+  listAccountTransactions(accountId: string, params: object): Pager<Transaction>;
+  listChildAccounts(accountId: string, params: object): Pager<Account>;
+  listAccountAcquisition(params: object): Pager<AccountAcquisition>;
+  listCoupons(params: object): Pager<Coupon>;
+  createCoupon(body: object): Promise<Coupon>;
   getCoupon(couponId: string): Promise<Coupon>;
-  updateCoupon(couponId: string, body: Object): Promise<Coupon>;
-  listUniqueCouponCodes(couponId: string, params: Object): Pager<UniqueCouponCode>;
-  listCreditPayments(params: Object): Pager<CreditPayment>;
+  updateCoupon(couponId: string, body: object): Promise<Coupon>;
+  listUniqueCouponCodes(couponId: string, params: object): Pager<UniqueCouponCode>;
+  listCreditPayments(params: object): Pager<CreditPayment>;
   getCreditPayment(creditPaymentId: string): Promise<CreditPayment>;
-  listCustomFieldDefinitions(params: Object): Pager<CustomFieldDefinition>;
+  listCustomFieldDefinitions(params: object): Pager<CustomFieldDefinition>;
   getCustomFieldDefinition(customFieldDefinitionId: string): Promise<CustomFieldDefinition>;
-  listInvoices(params: Object): Pager<Invoice>;
+  listInvoices(params: object): Pager<Invoice>;
   getInvoice(invoiceId: string): Promise<Invoice>;
-  putInvoice(invoiceId: string, body: Object): Promise<Invoice>;
-  collectInvoice(invoiceId: string, body: Object): Promise<Invoice>;
+  putInvoice(invoiceId: string, body: object): Promise<Invoice>;
+  collectInvoice(invoiceId: string, body: object): Promise<Invoice>;
   failInvoice(invoiceId: string): Promise<Invoice>;
   markInvoiceSuccessful(invoiceId: string): Promise<Invoice>;
   reopenInvoice(invoiceId: string): Promise<Invoice>;
   voidInvoice(invoiceId: string): Promise<Invoice>;
-  listInvoiceLineItems(invoiceId: string, params: Object): Pager<LineItem>;
-  listInvoiceCouponRedemptions(invoiceId: string, params: Object): Pager<CouponRedemption>;
-  listRelatedInvoices(invoiceId: string, params: Object): Pager<Invoice>;
-  refundInvoice(invoiceId: string, body: Object): Promise<Invoice>;
-  listLineItems(params: Object): Pager<LineItem>;
+  listInvoiceLineItems(invoiceId: string, params: object): Pager<LineItem>;
+  listInvoiceCouponRedemptions(invoiceId: string, params: object): Pager<CouponRedemption>;
+  listRelatedInvoices(invoiceId: string, params: object): Pager<Invoice>;
+  refundInvoice(invoiceId: string, body: object): Promise<Invoice>;
+  listLineItems(params: object): Pager<LineItem>;
   getLineItem(lineItemId: string): Promise<LineItem>;
   removeLineItem(lineItemId: string): Promise<Empty>;
-  listPlans(params: Object): Pager<Plan>;
-  createPlan(body: Object): Promise<Plan>;
+  listPlans(params: object): Pager<Plan>;
+  createPlan(body: object): Promise<Plan>;
   getPlan(planId: string): Promise<Plan>;
-  updatePlan(planId: string, body: Object): Promise<Plan>;
+  updatePlan(planId: string, body: object): Promise<Plan>;
   removePlan(planId: string): Promise<Plan>;
-  listPlanAddOns(planId: string, params: Object): Pager<AddOn>;
-  createPlanAddOn(planId: string, body: Object): Promise<AddOn>;
+  listPlanAddOns(planId: string, params: object): Pager<AddOn>;
+  createPlanAddOn(planId: string, body: object): Promise<AddOn>;
   getPlanAddOn(planId: string, addOnId: string): Promise<AddOn>;
-  updatePlanAddOn(planId: string, addOnId: string, body: Object): Promise<AddOn>;
+  updatePlanAddOn(planId: string, addOnId: string, body: object): Promise<AddOn>;
   removePlanAddOn(planId: string, addOnId: string): Promise<AddOn>;
-  listAddOns(params: Object): Pager<AddOn>;
+  listAddOns(params: object): Pager<AddOn>;
   getAddOn(addOnId: string): Promise<AddOn>;
-  listShippingMethods(params: Object): Pager<ShippingMethod>;
+  listShippingMethods(params: object): Pager<ShippingMethod>;
   getShippingMethod(id: string): Promise<ShippingMethod>;
-  listSubscriptions(params: Object): Pager<Subscription>;
-  createSubscription(body: Object): Promise<Subscription>;
+  listSubscriptions(params: object): Pager<Subscription>;
+  createSubscription(body: object): Promise<Subscription>;
   getSubscription(subscriptionId: string): Promise<Subscription>;
-  modifySubscription(subscriptionId: string, body: Object): Promise<Subscription>;
-  terminateSubscription(subscriptionId: string, params: Object): Promise<Subscription>;
+  modifySubscription(subscriptionId: string, body: object): Promise<Subscription>;
+  terminateSubscription(subscriptionId: string, params: object): Promise<Subscription>;
   cancelSubscription(subscriptionId: string): Promise<Subscription>;
   reactivateSubscription(subscriptionId: string): Promise<Subscription>;
-  pauseSubscription(subscriptionId: string, body: Object): Promise<Subscription>;
+  pauseSubscription(subscriptionId: string, body: object): Promise<Subscription>;
   resumeSubscription(subscriptionId: string): Promise<Subscription>;
   getSubscriptionChange(subscriptionId: string): Promise<SubscriptionChange>;
-  createSubscriptionChange(subscriptionId: string, body: Object): Promise<SubscriptionChange>;
+  createSubscriptionChange(subscriptionId: string, body: object): Promise<SubscriptionChange>;
   removeSubscriptionChange(subscriptionId: string): Promise<Empty>;
-  listSubscriptionInvoices(subscriptionId: string, params: Object): Pager<Invoice>;
-  listSubscriptionLineItems(subscriptionId: string, params: Object): Pager<LineItem>;
-  listSubscriptionCouponRedemptions(subscriptionId: string, params: Object): Pager<CouponRedemption>;
-  listTransactions(params: Object): Pager<Transaction>;
+  listSubscriptionInvoices(subscriptionId: string, params: object): Pager<Invoice>;
+  listSubscriptionLineItems(subscriptionId: string, params: object): Pager<LineItem>;
+  listSubscriptionCouponRedemptions(subscriptionId: string, params: object): Pager<CouponRedemption>;
+  listTransactions(params: object): Pager<Transaction>;
   getTransaction(transactionId: string): Promise<Transaction>;
   getUniqueCouponCode(uniqueCouponCodeId: string): Promise<UniqueCouponCode>;
   deactivateUniqueCouponCode(uniqueCouponCodeId: string): Promise<UniqueCouponCode>;
   reactivateUniqueCouponCode(uniqueCouponCodeId: string): Promise<UniqueCouponCode>;
-  createPurchase(body: Object): Promise<InvoiceCollection>;
-  previewPurchase(body: Object): Promise<InvoiceCollection>;
+  createPurchase(body: object): Promise<InvoiceCollection>;
+  previewPurchase(body: object): Promise<InvoiceCollection>;
 
 }
