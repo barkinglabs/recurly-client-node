@@ -678,7 +678,7 @@ export interface Empty {
 export declare class Pager<T> {
   count(): number;
   first(): T;
-  each(): Iterator<T>;
+  each(): AsyncIterator<T>;
   eachPage(): AsyncIterator<T>;
 }
 
