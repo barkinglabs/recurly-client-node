@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset='utf-8' />
-	<title>recurly 3.0.0 | Documentation</title>
+	<title>recurly 3.2.0 | Documentation</title>
 	<meta name='description' content='Recurly V3 node client'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
 	<link href='assets/styles.min.css' rel='stylesheet' />
@@ -15,7 +15,7 @@
 			<div class='font-smaller fixed col-3 top-0 bottom-0 left-0 overflow-auto fill-light dark-link'>
 				<div class='px2'>
 					<h3 class='mb0 no-anchor'><code>recurly</code></h3>
-					<div class='mb1'><code>3.0.0</code></div>
+					<div class='mb1'><code>3.2.0</code></div>
 					<input placeholder='Filter' id='filter-input' class='col12 block input' type='text' />
 					<div id="toc">
 						
@@ -315,6 +315,42 @@
 							</a>
 							
 							<a
+									href='#clientlistitems'
+									class='button-indent regular block'>
+								<code>#listItems</code>
+							</a>
+							
+							<a
+									href='#clientcreateitem'
+									class='button-indent regular block'>
+								<code>#createItem</code>
+							</a>
+							
+							<a
+									href='#clientgetitem'
+									class='button-indent regular block'>
+								<code>#getItem</code>
+							</a>
+							
+							<a
+									href='#clientupdateitem'
+									class='button-indent regular block'>
+								<code>#updateItem</code>
+							</a>
+							
+							<a
+									href='#clientdeactivateitem'
+									class='button-indent regular block'>
+								<code>#deactivateItem</code>
+							</a>
+							
+							<a
+									href='#clientreactivateitem'
+									class='button-indent regular block'>
+								<code>#reactivateItem</code>
+							</a>
+							
+							<a
 									href='#clientlistinvoices'
 									class='button-indent regular block'>
 								<code>#listInvoices</code>
@@ -330,6 +366,12 @@
 									href='#clientputinvoice'
 									class='button-indent regular block'>
 								<code>#putInvoice</code>
+							</a>
+							
+							<a
+									href='#clientgetinvoicepdf'
+									class='button-indent regular block'>
+								<code>#getInvoicePdf</code>
 							</a>
 							
 							<a
@@ -1025,6 +1067,28 @@
 						
 						
 						<a
+								href='#binaryfile'
+								class="regular block">
+							<code>BinaryFile</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
 								href='#coupon'
 								class="regular block">
 							<code>Coupon</code>
@@ -1399,6 +1463,28 @@
 						
 						
 						<a
+								href='#item'
+								class="regular block">
+							<code>Item</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
 								href='#lineitem'
 								class="regular block">
 							<code>LineItem</code>
@@ -1534,6 +1620,28 @@
 								href='#planpricing'
 								class="regular block">
 							<code>PlanPricing</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#pricing'
+								class="regular block">
+							<code>Pricing</code>
 							
 						</a>
 						
@@ -1955,19 +2063,25 @@
     </h2>
 
     
-      <h2>Installing</h2>
+      <h3>Installing</h3>
 <p>This library is published on npm under the name <code>recurly</code>.</p>
 <p>We recommend installing via the command line:</p>
 <pre><code>npm install recurly --save-prod
 </code></pre>
 <p>Or manually insert the dependency into the <code>dependencies</code> section of your <code>package.json</code>:</p>
+<blockquote>
+<p><strong>Note</strong>: We do try to strictly follow <a href="https://semver.org/">SemVer</a> so locking to a major version should be safe.</p>
+</blockquote>
 <pre><code>{
   // ...
-  "recurly" : "^3.0.0"
+  "recurly" : "^3.2.0"
   // ...
 }
 </code></pre>
-<h2>Creating a client</h2>
+<blockquote>
+<p><strong>Note</strong>: When upgrading, view the <a href="https://github.com/recurly/recurly-client-node/blob/master/CHANGELOG.md">CHANGELOG</a> to see what's changed.</p>
+</blockquote>
+<h3>Creating a client</h3>
 <p>A client object represents a connection to the Recurly API. The client implements
 each <code>operation</code> that can be performed in the API as a method.</p>
 <p>To initialize a client, you only need an API key which can be obtained on the <a href="https://app.recurly.com/go/integrations/api_keys">API Credentials Page</a>.</p>
@@ -1976,7 +2090,7 @@ each <code>operation</code> that can be performed in the API as a method.</p>
 <span class="hljs-comment">// and not in plain text if possible</span>
 <span class="hljs-keyword">const</span> myApiKey = <span class="hljs-string">'&lt;myapikey&gt;'</span>
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> recurly.Client(myApiKey)</pre>
-<h2>Operations</h2>
+<h3>Operations</h3>
 <p>All operations are <code>async</code> and return promises (except the <code>list*</code> methods which return <code>Pager</code>s).
 You can handle the promises directly with <code>then</code> and <code>catch</code> or use await:</p>
 <pre class='hljs'>client.getAccount(<span class="hljs-string">'code-benjamin'</span>)
@@ -1989,7 +2103,7 @@ You can handle the promises directly with <code>then</code> and <code>catch</cod
     <span class="hljs-comment">// handle err from client</span>
   }
 }</pre>
-<h2>Creating Resources</h2>
+<h3>Creating Resources</h3>
 <p>For creating or updating resources, pass a json object to one of the create<em> or update</em> methods.
 Keep in mind that the api accepts snake-cased keys but this library expects camel-cased keys.
 We do the translation for you so this library can conform to js style standards.</p>
@@ -2011,7 +2125,7 @@ We do the translation for you so this library can conform to js style standards.
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
   }
 }</pre>
-<h2>Pagination</h2>
+<h3>Pagination</h3>
 <p>All <code>list*</code> methods on the client return a <code>Pager</code>. They
 are not <code>async</code> because they are lazy and do not make any
 network requests until they are iterated over. There are
@@ -2077,7 +2191,7 @@ method respects any filtering parameters you apply to the pager, but the sorting
 
 <span class="hljs-keyword">const</span> count = <span class="hljs-keyword">await</span> accounts.count()
 <span class="hljs-comment">// =&gt; 573</span></pre>
-<h2>Error Handling</h2>
+<h3>Error Handling</h3>
 <p>This library currently throws 1 primary class of exceptions, recurly.ApiError.
 The ApiError comes in a few flavors which help you determine what to do next. To see a full list, view the <a href="lib/recurly/api_errors.js">api_errors module</a>.</p>
 <pre class='hljs'><span class="hljs-keyword">try</span> {
@@ -2104,7 +2218,7 @@ The ApiError comes in a few flavors which help you determine what to do next. To
     }
   }
 }</pre>
-<h2>HTTP Metadata</h2>
+<h3>HTTP Metadata</h3>
 <p>Sometimes you might want to get some additional information about the underlying HTTP request and response. Instead of
 returning this information directly and forcing the programmer to unwrap it, we inject this metadata into the top level
 resource that was returned. You can access the response by calling <code>getResponse()</code> on any Resource.</p>
@@ -2129,7 +2243,7 @@ response.request.body <span class="hljs-comment">// null</span></pre>
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
   }
 }</pre>
-<h2>Webhooks</h2>
+<h3>Webhooks</h3>
 <p>Recurly can send webhooks to any publicly accessible server. When an event in Recurly triggers
 a webhook (e.g., an account is opened), Recurly will attempt to send this notification to the
 endpoint(s) you specify.  You can specify up to 10 endpoints through the application. All
@@ -2436,11 +2550,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Site ID or subdomain (use prefix: 
+			<td class='col-6'>Site ID or subdomain. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For subdomain use prefix 
 <code>subdomain-</code>
 , e.g. 
 <code>subdomain-recurly</code>
-).
+.
 </td>
 		</tr>
 		
@@ -2868,11 +2984,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -2968,11 +3086,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3083,11 +3203,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3182,11 +3304,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3282,11 +3406,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3398,11 +3524,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3498,11 +3626,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3597,11 +3727,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3697,11 +3829,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3797,11 +3931,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3912,11 +4048,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4012,11 +4150,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4187,11 +4327,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4287,11 +4429,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4379,11 +4523,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4460,11 +4606,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4645,11 +4793,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4862,11 +5012,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4979,11 +5131,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5096,11 +5250,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5331,11 +5487,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5447,11 +5605,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5576,11 +5736,13 @@ returned at once you can sort the records yourself.</li>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5688,11 +5850,13 @@ returned at once you can sort the records yourself.</li>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5897,11 +6061,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6017,11 +6183,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6128,11 +6296,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6254,11 +6424,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6365,11 +6537,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6581,11 +6755,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6810,11 +6986,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -7513,11 +7691,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Coupon ID or code (use prefix: 
+			<td class='col-6'>Coupon ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-10off</code>
-).
+.
 </td>
 		</tr>
 		
@@ -7613,11 +7793,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Coupon ID or code (use prefix: 
+			<td class='col-6'>Coupon ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-10off</code>
-).
+.
 </td>
 		</tr>
 		
@@ -7705,11 +7887,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Coupon ID or code (use prefix: 
+			<td class='col-6'>Coupon ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-10off</code>
-).
+.
 </td>
 		</tr>
 		
@@ -8074,11 +8258,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Credit Payment ID or UUID (use prefix: 
+			<td class='col-6'>Credit Payment ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -8265,6 +8451,18 @@ prevent some records from being returned.
 
 
 		
+		<tr>
+  <td class='col-2 strong'>params.relatedType</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Filter by related type.
+</td>
+</tr>
+
+
+		
 		
 		
 	</table>
@@ -8391,6 +8589,622 @@ prevent some records from being returned.
   }
 }</code></pre>
 	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientlistitems'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientlistitems'>
+			<code>
+				listItems
+				<span class='gray'>(params)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>List a site's items</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_items">https://developers.recurly.com/api/v2019-10-10#operation/list_items</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>params</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+				
+				= <code>{}</code>
+			</td>
+			<td class='col-6'>The optional url parameters for this request.
+</td>
+		</tr>
+		
+		
+		<tr>
+  <td class='col-2 strong'>params.ids</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    
+  </td>
+  <td class='col-8'>Filter results by their IDs. Up to 200 IDs can be passed at once using
+commas as separators, e.g. 
+<code>ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6</code>
+.
+<p>  <strong>Important notes:</strong></p>
+<ul>
+<li>The <code>ids</code> parameter cannot be used with any other ordering or filtering
+parameters (<code>limit</code>, <code>order</code>, <code>sort</code>, <code>begin_time</code>, <code>end_time</code>, etc)</li>
+<li>Invalid or unknown IDs will be ignored, so you should check that the
+results correspond to your request.</li>
+<li>Records are returned in an arbitrary order. Since results are all
+returned at once you can sort the records yourself.</li>
+</ul>
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.limit</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+    
+  </td>
+  <td class='col-8'>Limit number of records 1-200.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.order</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Sort order.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.sort</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Sort field. You 
+<em>really</em>
+ only want to sort by 
+<code>updated_at</code>
+ in ascending
+order. In descending order updated records will move behind the cursor and could
+prevent some records from being returned.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.beginTime</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+    
+  </td>
+  <td class='col-8'>Filter by begin_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.endTime</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+    
+  </td>
+  <td class='col-8'>Filter by end_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.state</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Filter by state.
+</td>
+</tr>
+
+
+		
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="#pager">Pager</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>A list of the site's items.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientcreateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientcreateitem'>
+			<code>
+				createItem
+				<span class='gray'>(body)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Create a new item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_item">https://developers.recurly.com/api/v2019-10-10#operation/create_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 quiet'>
+				ItemCreate
+				
+			</td>
+			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {ItemCreate}
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>A new item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientgetitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientgetitem'>
+			<code>
+				getItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Fetch an item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_item">https://developers.recurly.com/api/v2019-10-10#operation/get_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientupdateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientupdateitem'>
+			<code>
+				updateItem
+				<span class='gray'>(itemId, body)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Update an active item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_item">https://developers.recurly.com/api/v2019-10-10#operation/update_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 quiet'>
+				ItemUpdate
+				
+			</td>
+			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {ItemUpdate}
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>The updated item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientdeactivateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientdeactivateitem'>
+			<code>
+				deactivateItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Deactivate an item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/deactivate_item">https://developers.recurly.com/api/v2019-10-10#operation/deactivate_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientreactivateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientreactivateitem'>
+			<code>
+				reactivateItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Reactivate an inactive item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_item">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
 	
 
 	
@@ -8657,11 +9471,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -8757,11 +9573,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -8832,6 +9650,116 @@ prevent some records from being returned.
 </section>
 
   
+    <section id='clientgetinvoicepdf'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientgetinvoicepdf'>
+			<code>
+				getInvoicePdf
+				<span class='gray'>(invoiceId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Fetch an invoice as a PDF</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_invoice_pdf">https://developers.recurly.com/api/v2019-10-10#operation/get_invoice_pdf</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>invoiceId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
+<code>number-</code>
+, e.g. 
+<code>number-1000</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#binaryfile">BinaryFile</a>></code>
+	:
+	<span class='force-inline'>An invoice as a PDF.
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.getInvoicePdf(invoiceId)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Invoice: '</span>, invoice)
+  <span class="hljs-keyword">const</span> filename = <span class="hljs-string">`<span class="hljs-subst">${downloadDirectory}</span>/nodeinvoice-<span class="hljs-subst">${invoiceId}</span>.pdf`</span>
+  <span class="hljs-keyword">await</span> fs.writeFile(filename, invoice.data, <span class="hljs-string">'binary'</span>, (err) =&gt; {
+    <span class="hljs-comment">// throws an error, you could also catch it here</span>
+    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
+
+    <span class="hljs-comment">// success case, the file was saved</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Saved Invoice PDF to'</span>, filename)
+  })
+} <span class="hljs-keyword">catch</span> (err) {
+  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
+    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+    <span class="hljs-comment">// just return null</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+  }
+}</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
     <section id='clientcollectinvoice'class='mt2 mb2 px3 py1 keyline-top'>
 
 	<div class='right py2'>
@@ -8843,7 +9771,7 @@ prevent some records from being returned.
 		<a class='black' href='#clientcollectinvoice'>
 			<code>
 				collectInvoice
-				<span class='gray'>(invoiceId, body)</span>
+				<span class='gray'>(invoiceId, params)</span>
 			</code>
 		</a>
 	</h3>
@@ -8874,24 +9802,41 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
 		
 		<tr>
-			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 strong'><code>params</code></td>
 			<td class='col-3 quiet'>
-				InvoiceCollect
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
 				
+				= <code>{}</code>
 			</td>
-			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
+			<td class='col-6'>The optional url parameters for this request.
 </td>
 		</tr>
+		
+		
+		<tr>
+  <td class='col-2 strong'>params.body</td>
+  <td class="col-2 quiet">
+    InvoiceCollect
+    
+  </td>
+  <td class='col-8'>The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
+</td>
+</tr>
+
+
+		
 		
 		
 	</table>
@@ -8985,11 +9930,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9085,11 +10032,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9186,11 +10135,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9286,11 +10237,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9367,11 +10320,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9602,11 +10557,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9777,11 +10734,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9879,11 +10838,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -10731,11 +11692,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -10831,11 +11794,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -10945,11 +11910,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11045,11 +12012,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11256,11 +12225,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11348,11 +12319,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11363,11 +12336,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11444,11 +12419,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11459,11 +12436,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11551,11 +12530,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11566,11 +12547,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11843,11 +12826,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12108,11 +13093,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Shipping Method ID or code (use prefix: 
+			<td class='col-6'>Shipping Method ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-usps_2-day</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12503,11 +13490,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12603,11 +13592,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12719,11 +13710,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12827,7 +13820,7 @@ prevent some records from being returned.
 		<a class='black' href='#clientcancelsubscription'>
 			<code>
 				cancelSubscription
-				<span class='gray'>(subscriptionId)</span>
+				<span class='gray'>(subscriptionId, params)</span>
 			</code>
 		</a>
 	</h3>
@@ -12858,13 +13851,41 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>params</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+				
+				= <code>{}</code>
+			</td>
+			<td class='col-6'>The optional url parameters for this request.
+</td>
+		</tr>
+		
+		
+		<tr>
+  <td class='col-2 strong'>params.body</td>
+  <td class="col-2 quiet">
+    SubscriptionCancel
+    
+  </td>
+  <td class='col-8'>The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCancel}
+</td>
+</tr>
+
+
+		
 		
 		
 	</table>
@@ -12958,11 +13979,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13059,11 +14082,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13151,11 +14176,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13232,11 +14259,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13332,11 +14361,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13448,11 +14479,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13548,11 +14581,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13765,11 +14800,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14000,11 +15037,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14399,11 +15438,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Transaction ID or UUID (use prefix: 
+			<td class='col-6'>Transaction ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14499,11 +15540,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Unique Coupon Code ID or code (use prefix: 
+			<td class='col-6'>Unique Coupon Code ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-abc-8dh2-def</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14580,11 +15623,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Unique Coupon Code ID or code (use prefix: 
+			<td class='col-6'>Unique Coupon Code ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-abc-8dh2-def</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14661,11 +15706,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Unique Coupon Code ID or code (use prefix: 
+			<td class='col-6'>Unique Coupon Code ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-abc-8dh2-def</code>
-).
+.
 </td>
 		</tr>
 		
@@ -15788,6 +16835,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>parentAccountId</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -16067,6 +17126,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
 		</tr>
 
 		
@@ -16367,6 +17438,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
 		</tr>
 
 		
@@ -16716,6 +17799,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>parentAccountId</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -16881,6 +17976,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
 		</tr>
 
 		
@@ -17120,6 +18227,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>planId</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -17331,6 +18450,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Describes your add-on and will appear in subscribers' invoices.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -17904,6 +19035,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>paymentMethod</td>
 			<td class='col-2 quiet'>
 				<a href="#paymentmethod">PaymentMethod</a>
@@ -18095,6 +19238,132 @@ need and we will usher them to the appropriate places.</p>
 			</td>
 			<td class='col-8'>: Customer's IP address when updating their billing information.
 </td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id='binaryfile'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#binaryfile'>
+			<code>
+				BinaryFile
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>BinaryFile</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>data</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'></td>
 		</tr>
 
 		
@@ -18418,6 +19687,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: The internal name for the coupon.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -19202,6 +20483,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>state</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -19400,6 +20693,20 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Will always be 
+<code>coupon</code>
+.
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>removedAt</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
@@ -19592,6 +20899,20 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Coupon Redemption ID
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Will always be 
+<code>coupon</code>
+.
 </td>
 		</tr>
 
@@ -19801,6 +21122,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Credit Payment ID
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -20187,6 +21520,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Used by the API to identify the field or reading and writing. The name can only be used once per Recurly object type.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -21006,6 +22351,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>origin</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -21604,6 +22961,18 @@ need and we will usher them to the appropriate places.</p>
 
 		
 		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
 	</table>
 	
 
@@ -21744,6 +23113,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>state</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -21762,6 +23143,321 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Invoice type
+</td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id='item'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#item'>
+			<code>
+				Item
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Item</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>accountingCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Accounting code for invoice line items.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>code</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Unique code to identify the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>createdAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Created at
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>currencies</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#pricing">Pricing</a>>
+				
+			</td>
+			<td class='col-8'>: Item Pricing
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>customFields</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#customfield">CustomField</a>>
+				
+			</td>
+			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>deletedAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Deleted at
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>description</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Optional, description.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>externalSku</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Optional, stock keeping unit to link the item to other inventory systems.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>id</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Item ID
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>name</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: This name describes your item and will appear on the invoice when it's purchased on a one time basis.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>state</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: The current state of the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>taxCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use 
+<code>unknown</code>
+, 
+<code>physical</code>
+, or 
+<code>digital</code>
+.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>taxExempt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: <code>true</code>
+ exempts tax on the item, 
+<code>false</code>
+ applies tax on the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>updatedAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Last updated at
 </td>
 		</tr>
 
@@ -22064,12 +23760,48 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>itemCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Unique code to identify an item, when the Catalog feature is enabled.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>itemId</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Available when the Catalog feature is enabled.
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>legacyCategory</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
 			<td class='col-8'>: Category to describe the role of a line item on a legacy invoice: - "charges" refers to charges being billed for on this invoice. - "credits" refers to refund or proration credits. This portion of the invoice can be considered a credit memo. - "applied_credits" refers to previous credits applied to this invoice. See their original_line_item_id to determine where the credit first originated. - "carryforwards" can be ignored. They exist to consume any remaining credit balance. A new credit with the same amount will be created and placed back on the account.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -22141,7 +23873,9 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: For plan related line items this will be the plan's code, for add-on related line items it will be the add-on's code.
+			<td class='col-8'>: For plan-related line items this will be the plan's code, for add-on related line items it will be the add-on's code. For item-related line itmes it will be the item's 
+<code>external_sku</code>
+.
 </td>
 		</tr>
 
@@ -22192,6 +23926,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
 </td>
 		</tr>
 
@@ -22527,6 +24273,18 @@ need and we will usher them to the appropriate places.</p>
 
 		
 		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Will always be List.
+</td>
+		</tr>
+
+		
+		
 	</table>
 	
 
@@ -22722,6 +24480,17 @@ need and we will usher them to the appropriate places.</p>
 			</td>
 			<td class='col-8'>: Credit card number's last four digits. Will refer to bank account if payment method is ACH.
 </td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'></td>
 		</tr>
 
 		
@@ -23016,6 +24785,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: This name describes your plan and will appear on the Hosted Payment Page and the subscriber's invoice.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -23452,6 +25233,18 @@ need and we will usher them to the appropriate places.</p>
 
 		
 		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
 	</table>
 	
 
@@ -23586,6 +25379,145 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Amount of one-time setup fee automatically charged at the beginning of a subscription billing cycle. For subscription plans with a trial, the setup fee will be charged at the time of signup. Setup fees do not increase with the quantity of a subscription plan.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>unitAmount</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+				
+			</td>
+			<td class='col-8'>: Unit price
+</td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id='pricing'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#pricing'>
+			<code>
+				Pricing
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Pricing</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>currency</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: 3-letter ISO 4217 currency code.
 </td>
 		</tr>
 
@@ -23985,6 +25917,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>phone</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -24240,6 +26184,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>taxCode</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -24428,6 +26384,18 @@ need and we will usher them to the appropriate places.</p>
 
 		
 		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
 	</table>
 	
 
@@ -24609,6 +26577,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Mode
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -25030,6 +27010,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>pausedAt</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
@@ -25415,6 +27407,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>quantity</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
@@ -25652,6 +27656,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>plan</td>
 			<td class='col-2 quiet'>
 				<a href="#planmini">PlanMini</a>
@@ -25866,6 +27882,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
 		</tr>
 
 		
@@ -26383,7 +28411,19 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.JS or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.
+			<td class='col-8'>: IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.js or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -26732,6 +28772,30 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>threeDSecureActionTokenId</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Returned when 3-D Secure authentication is required for a transaction. Pass this value to Recurly.js so it can continue the challenge flow.
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>transactionId</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -26876,6 +28940,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
 		</tr>
 
 		
@@ -27051,6 +29127,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Unique Coupon Code ID
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
 </td>
 		</tr>
 
@@ -27269,6 +29357,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>object</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Object type
+</td>
 		</tr>
 
 		
